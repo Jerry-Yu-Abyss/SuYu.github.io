@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇彥丞 | 個人履歷</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #070b14;
+    --surface: #0d1424;
+    --card: #111827;
+    --border: rgba(99,179,237,0.15);
+    --accent1: #63b3ed;
+    --accent2: #9f7aea;
+    --accent3: #68d391;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --grad: linear-gradient(135deg, #63b3ed 0%, #9f7aea 50%, #f687b3 100%);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── ANIMATED GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(99,179,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,179,237,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb1 { width: 500px; height: 500px; background: rgba(99,179,237,0.12); top: -100px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(159,122,234,0.10); bottom: 100px; left: -150px; }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* ── HERO HEADER ── */
+  .hero {
+    text-align: center;
+    padding: 70px 0 60px;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent1);
+    border: 1px solid rgba(99,179,237,0.35);
+    border-radius: 20px;
+    padding: 5px 16px;
+    margin-bottom: 28px;
+    background: rgba(99,179,237,0.06);
+  }
+
+  .hero-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(52px, 10vw, 86px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-bottom: 36px;
+  }
+
+  .hero-contacts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .contact-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+  .contact-chip:hover { border-color: var(--accent1); color: var(--accent1); }
+  .contact-chip svg { flex-shrink: 0; }
+
+  /* ── DIVIDER ── */
+  .grad-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent1), var(--accent2), transparent);
+    margin: 8px 0 52px;
+    opacity: 0.4;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 52px; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .section-label span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent2);
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── ABOUT ── */
+  .about-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #a0aec0;
+    max-width: 680px;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--grad);
+    border-radius: 3px 0 0 3px;
+  }
+  .edu-degree {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .edu-school {
+    font-size: 14px;
+    color: var(--accent1);
+    margin-bottom: 8px;
+  }
+  .edu-year {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+
+  .skill-group-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 14px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(99,179,237,0.2);
+    color: var(--muted);
+    background: rgba(99,179,237,0.04);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 20px;
+    transition: border-color 0.2s;
+  }
+  .exp-card:hover { border-color: rgba(159,122,234,0.35); }
+
+  .exp-title { font-size: 15px; font-weight: 600; grid-column: 1; }
+  .exp-org { font-size: 13px; color: var(--accent2); grid-column: 1; }
+  .exp-date {
+    font-size: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--muted);
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+    white-space: nowrap;
+    align-self: center;
+  }
+  .exp-desc {
+    font-size: 13px;
+    color: #718096;
+    line-height: 1.7;
+    grid-column: 1 / -1;
+    margin-top: 10px;
+  }
+
+  /* ── PROJECTS ── */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 22px;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .proj-card:hover { transform: translateY(-3px); border-color: rgba(99,179,237,0.3); }
+
+  .proj-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(99,179,237,0.1);
+    border: 1px solid rgba(99,179,237,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+    font-size: 16px;
+  }
+
+  .proj-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .proj-desc { font-size: 13px; color: #718096; line-height: 1.65; margin-bottom: 14px; }
+
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .proj-tag {
+    font-size: 11px;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(159,122,234,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(159,122,234,0.2);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .hero-name { font-size: 48px; }
+    .exp-card { grid-template-columns: 1fr; }
+    .exp-date { grid-column: 1; grid-row: auto; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-orb orb1"></div>
+<div class="glow-orb orb2"></div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Portfolio · Resume · 2025</div>
+    <h1 class="hero-name">宇彥丞</h1>
+    <p class="hero-sub">資訊工程學系 · Full-Stack Developer in Training</p>
+    <div class="hero-contacts">
+      <a class="contact-chip" href="mailto:reso950211zxc@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        reso950211zxc@gmail.com
+      </a>
+      <a class="contact-chip" href="https://github.com/yourusername" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+        github.com/yourusername
+      </a>
+      <span class="contact-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        台中市，台灣
+      </span>
+    </div>
+  </header>
+
+  <div class="grad-line"></div>
+
+  <!-- ABOUT -->
+  <section class="section">
+    <div class="section-label"><span>關於我</span></div>
+    <p class="about-text">
+      我是宇彥丞，就讀資訊工程學系，對軟體開發與系統設計充滿熱情。
+      熱衷於探索前後端技術，喜歡透過實作專案將想法轉化為實際產品。
+      善於運用 Git 版本控制進行協作開發，持續精進程式設計能力，
+      期望未來能夠投入全端開發或系統架構相關領域。
+    </p>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section">
+    <div class="section-label"><span>學歷</span></div>
+    <div class="edu-card">
+      <div class="edu-degree">資訊工程學系</div>
+      <div class="edu-school">亞洲大學</div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section">
+    <div class="section-label"><span>技術能力</span></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">程式語言</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">C / C++</span>
+          <span class="tag">Java</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">網頁技術</div>
+        <div class="skill-tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript ES6+</span>
+          <span class="tag">React</span>
+          <span class="tag">Vue.js</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">工具 & 版本控制</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">Linux</span>
+          <span class="tag">ComfyUI</span>
+          <span class="tag">Swift</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">其他</div>
+        <div class="skill-tags">
+          <span class="tag">資料結構</span>
+          <span class="tag">演算法</span>
+          <span class="tag">物件導向設計</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section">
+    <div class="section-label"><span>經歷</span></div>
+    <div class="exp-list">
+      <div class="exp-card">
+        <div class="exp-title">劍道社社長</div>
+        <div class="exp-org">亞洲大學劍道社</div>
+        <div class="exp-date"></div>
+        <p class="exp-desc">擔任社長期間負責統籌社團行政事務、對外聯繫與活動規劃，帶領社員參與校內外賽事，培養領導統御與團隊協作能力。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section">
+    <div class="section-label"><span>作品專案</span></div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-icon">🛒</div>
+        <div class="proj-title"><a href="https://yabuy-2026a.web.app" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(99,179,237,0.4);">YaBuy</a></div>
+        <p class="proj-desc">校園二手安全交易平台(測試版)，點擊標題可直接前往體驗。</p>
+        <div class="proj-stack">
+          <span class="proj-tag">Vue.js</span>
+          <span class="proj-tag">Firebase</span>
+          <span class="proj-tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 宇彥丞 · Built with HTML / CSS / JavaScript · Hosted on GitHub Pages</p>
+  </footer>
+
+</div>
+</body>
+</html>
